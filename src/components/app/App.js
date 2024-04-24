@@ -3,22 +3,25 @@ import React from 'react'
 import TicketList from '../ticketList/ticketList'
 import TicketFilter from '../ticketFilter/ticketFilter'
 import TransferCount from '../transferCount/transferCount'
-// import svg from '../icons/Logo.svg'
-// import './app.scss'
+import svg from '../icons/plane.svg'
+
+import styles from './app.module.scss'
 
 function App() {
-	return (
-		<>
-			<img alt='' className='iconPlane' />
-			<div className='block'>
-				<TransferCount />
-				<div>
-					<TicketFilter />
-					<TicketList />
-				</div>
-			</div>
-		</>
-	)
+  return (
+    <>
+      <div className={styles.containerElement}>
+        <img alt="" className={styles.iconPlane} src={svg} />
+        <div className={styles.container}>
+          <TransferCount />
+          <div className={styles.containerTicket}>
+            <TicketFilter />
+            <TicketList />
+          </div>
+        </div>
+      </div>
+    </>
+  )
 }
 
 export default App

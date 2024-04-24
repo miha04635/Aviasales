@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+body {
+	background-color: rgba(243, 247, 250, 1);
+}
+
+.container {
+	display: flex;
+	justify-content: space-around;
+	height: 100vh;
+}
+
+.containerElement {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.iconPlane {
+	width: 60px;
+	height: 60px;
+	margin-bottom: 50px;
+}

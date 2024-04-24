@@ -1,7 +1,9 @@
 import React from 'react'
 
-const ticketList = () => {
-	return <></>
+import TicketItem from '../ticketItem/ticketItem'
+
+const TicketList = () => {
+  return <TicketItem />
 }
 
-export default ticketList
+export default TicketList
