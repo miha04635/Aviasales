@@ -3,6 +3,7 @@ import { DATA_TICKET, SAVE_DATA_TICKET } from '../actions/actions'
 const initialState = {
   searchId: null,
   ticket: null,
+  stop: null,
 }
 
 const ticketReducer = (state = initialState, action = {}) => {
@@ -16,6 +17,7 @@ const ticketReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         ticket: action.payload,
+        stop: action.test,
       }
     }
     default:
