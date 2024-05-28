@@ -12,9 +12,15 @@ const initialState = {
   oneTransfer: false,
   twoTransfer: false,
   threeTransfer: false,
+  filterTicket: [],
 }
 
 const checkboxReducer = (state = initialState, action = {}) => {
+  if (action.ticket === undefined) {
+    return initialState
+  }
+  const tickets = action.ticket
+
   switch (action.type) {
     case TOGGLE_ALL_CHECKBOX: {
       return {
@@ -24,65 +30,55 @@ const checkboxReducer = (state = initialState, action = {}) => {
         oneTransfer: action.payload,
         twoTransfer: action.payload,
         threeTransfer: action.payload,
+        filterTicket: action.payload ? tickets : [],
       }
     }
     case TOGGLE_NO_CHECKBOX: {
-      if (state.allTransfer) {
-        return {
-          ...state,
-          allTransfer: false,
-          noTransfer: action.payload,
-        }
-      }
+      const noStops = tickets.filter(ticket => ticket.segments.every(segment => segment.stops.length === 0))
 
-      Object.keys(initialState).forEach(key => {
-        console.log(`${key}:`, initialState[key])
-      })
       return {
         ...state,
+        allTransfer: state.allTransfer && !action.payload ? false : state.allTransfer,
         noTransfer: action.payload,
+        filterTicket: action.payload
+          ? [...state.filterTicket, ...noStops]
+          : state.filterTicket.filter(ticket => !noStops.includes(ticket)),
       }
     }
-
     case TOGGLE_ONE_CHECKBOX: {
-      if (state.allTransfer) {
-        return {
-          ...state,
-          allTransfer: false,
-          oneTransfer: action.payload,
-        }
-      }
+      const oneStops = tickets.filter(ticket => ticket.segments.every(segment => segment.stops.length === 1))
+
       return {
         ...state,
+        allTransfer: state.allTransfer && !action.payload ? false : state.allTransfer,
         oneTransfer: action.payload,
+        filterTicket: action.payload
+          ? [...state.filterTicket, ...oneStops]
+          : state.filterTicket.filter(ticket => !oneStops.includes(ticket)),
       }
     }
-
     case TOGGLE_TWO_CHECKBOX: {
-      if (state.allTransfer) {
-        return {
-          ...state,
-          allTransfer: false,
-          twoTransfer: action.payload,
-        }
-      }
+      const twoStops = tickets.filter(ticket => ticket.segments.every(segment => segment.stops.length === 2))
+
       return {
         ...state,
+        allTransfer: state.allTransfer && !action.payload ? false : state.allTransfer,
         twoTransfer: action.payload,
+        filterTicket: action.payload
+          ? [...state.filterTicket, ...twoStops]
+          : state.filterTicket.filter(ticket => !twoStops.includes(ticket)),
       }
     }
-
     case TOGGLE_THREE_CHECKBOX: {
-      if (state.allTransfer) {
-        return {
-          ...state,
-          allTransfer: false,
-          threeTransfer: action.payload,
-        }
-      }
+      const threeStops = tickets.filter(ticket => ticket.segments.every(segment => segment.stops.length === 3))
+
       return {
         ...state,
+        allTransfer: state.allTransfer && !action.payload ? false : state.allTransfer,
         threeTransfer: action.payload,
+        filterTicket: action.payload
+          ? [...state.filterTicket, ...threeStops]
+          : state.filterTicket.filter(ticket => !threeStops.includes(ticket)),
       }
     }
     default:

@@ -39,9 +39,7 @@ p {
   .departure,
   .arrival,
   .onTheWayFrom,
-  .onTheWayTo,
-  .transferFrom,
-  .transferTo {
+  .onTheWayTo {
     p:first-of-type {
       color: rgba(160, 176, 185, 1);
     }
@@ -50,7 +48,13 @@ p {
     }
   }
 }
-
+.transfer {
+  display: flex;
+  gap: 5px;
+}
+.counterTransfer {
+  color: rgba(160, 176, 185, 1);
+}
 .infoTicket {
   display: flex;
   justify-content: space-between;

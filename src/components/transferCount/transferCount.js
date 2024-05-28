@@ -14,6 +14,7 @@ import styles from './transferCount.module.scss'
 const TransferCount = () => {
   const dispatch = useDispatch()
   const isChecked = useSelector(state => state.checkbox)
+  const ticket = useSelector(state => state.ticket.ticket)
 
   const checkboxes = [
     { id: 'allTransfer', label: 'Все', action: TOGGLE_ALL_CHECKBOX },
@@ -23,7 +24,7 @@ const TransferCount = () => {
     { id: 'threeTransfer', label: '3 пересадки', action: TOGGLE_THREE_CHECKBOX },
   ]
   const handleCheckboxChange = action => event => {
-    dispatch({ type: action, payload: event.target.checked })
+    dispatch({ type: action, payload: event.target.checked, ticket })
   }
 
   const element = checkboxes.map(({ id, label, action }) => (
@@ -44,26 +45,3 @@ const TransferCount = () => {
 }
 
 export default TransferCount
-// const toggleAll = event => {
-// 	const { checked } = event.target
-// 	dispatch({ type: TOGGLE_ALL_CHECKBOX, payload: checked })
-// }
-
-// const toggleNo = event => {
-// 	const { checked } = event.target
-// 	dispatch({ type: toggleNoCheckbox, payload: checked })
-// }
-
-// const toggleOne = event => {
-// 	const { checked } = event.target
-// 	dispatch({ type: toggleOneCheckbox, payload: checked })
-// }
-
-// const toggleTwo = event => {
-// 	const { checked } = event.target
-// 	dispatch({ type: toggleTwoCheckbox, payload: checked })
-// }
-// const toggleThree = event => {
-// 	const { checked } = event.target
-// 	dispatch({ type: toggleThreeCheckbox, payload: checked })
-// }

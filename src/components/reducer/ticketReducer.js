@@ -1,9 +1,9 @@
-import { DATA_TICKET, SAVE_DATA_TICKET } from '../actions/actions'
+import { DATA_TICKET, SAVE_DATA_TICKET, TICKET_SORT_PRICE } from '../actions/actions'
 
 const initialState = {
   searchId: null,
-  ticket: null,
-  stop: null,
+  ticket: [],
+  stop: false,
 }
 
 const ticketReducer = (state = initialState, action = {}) => {
@@ -16,9 +16,12 @@ const ticketReducer = (state = initialState, action = {}) => {
     case SAVE_DATA_TICKET: {
       return {
         ...state,
-        ticket: action.payload,
+        ticket: [...state.ticket, ...action.payload],
         stop: action.test,
       }
+    }
+    case TICKET_SORT_PRICE: {
+      return { ...state }
     }
     default:
       return state

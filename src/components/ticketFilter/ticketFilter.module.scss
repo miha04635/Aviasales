@@ -1,53 +1,57 @@
+// ticketFilter.module.scss
+
 .container {
-	position: relative;
-	display: flex;
-	box-sizing: border-box;
-	width: 502px;
-	justify-content: space-around;
-	align-items: center;
-	height: 50px;
-	border-radius: 5px;
-	margin-left: 16px;
-	background-color: #fff;
-	margin-bottom: 16px;
-	button {
-		border: 1px solid rgba(223, 229, 236, 1);
-		outline: none;
-		cursor: pointer;
-		background-color: #fff;
-	}
-	.active {
-		color: rgba(255, 255, 255, 1);
-		background-color: rgba(33, 150, 243, 1);
-	}
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  width: 502px;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+  border-radius: 5px;
+  margin-left: 16px;
+  background-color: #fff;
+  margin-bottom: 16px;
 
-	&__text {
-		font-weight: 600;
-		color: rgba(74, 74, 74, 1);
-		text-transform: uppercase;
-		flex-grow: 1;
-		height: 50px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-family: Open Sans;
-		font-size: 12px;
-		line-height: 20px;
-		letter-spacing: 0.5px;
-		text-align: center;
+  button {
+    border: 1px solid rgba(223, 229, 236, 1);
+    outline: none;
+    cursor: pointer;
+    background-color: #fff;
+  }
 
-		&:not(:last-child) {
-			border-right: 1px solid rgba(223, 229, 236, 1);
-		}
+  .active {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(33, 150, 243, 1);
+  }
 
-		&:first-child {
-			border-top-left-radius: 5px;
-			border-bottom-left-radius: 5px;
-		}
+  &__text {
+    font-weight: 600;
+    color: rgba(74, 74, 74, 1);
+    text-transform: uppercase;
+    flex-grow: 1;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    text-align: center;
 
-		&:last-child {
-			border-top-right-radius: 5px; // Закругляем верхний правый угол у последнего элемента
-			border-bottom-right-radius: 5px; // Закругляем нижний правый угол у последнего элемента
-		}
-	}
+    &:not(:last-child) {
+      border-right: 1px solid rgba(223, 229, 236, 1);
+    }
+
+    &:first-child {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 5px; // Закругляем верхний правый угол у последнего элемента
+      border-bottom-right-radius: 5px; // Закругляем нижний правый угол у последнего элемента
+    }
+  }
 }
