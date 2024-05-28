@@ -50,8 +50,8 @@
     }
 
     &:last-child {
-      border-top-right-radius: 5px; // Закругляем верхний правый угол у последнего элемента
-      border-bottom-right-radius: 5px; // Закругляем нижний правый угол у последнего элемента
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
     }
   }
 }
