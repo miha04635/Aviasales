@@ -31,9 +31,9 @@ const TicketFilter = () => {
   }
 
   const getOptimalScore = ticket => {
-    const priceWeight = 1 // Вес цены
-    const durationWeight = 0.1 // Вес продолжительности
-    const stopsWeight = 10 // Вес пересадок
+    const priceWeight = 1
+    const durationWeight = 0.1
+    const stopsWeight = 10
 
     const totalPrice = ticket.price * priceWeight
     const totalDuration = getTotalDuration(ticket) * durationWeight

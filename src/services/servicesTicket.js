@@ -19,7 +19,7 @@ const useFetchDataTicket = () => {
 
       return data
     } catch (error) {
-      console.log(error)
+      throw new Error('Error', error)
     }
   }
 
@@ -35,7 +35,7 @@ const useFetchDataTicket = () => {
 
       return data
     } catch (error) {
-      console.log(error)
+      throw new Error('Error')
     }
   }
 

@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { addMinutes, format } from 'date-fns'
 import { nanoid } from 'nanoid'
 
+import DepartureArrival from '../departureArrival/departureArrival'
+import FromTo from '../fromTo/fromTo'
+import TransferFromTransferTo from '../transferFromTransferTo/transferFromTransferTo'
 import './ticketList.scss'
 
 const TicketList = () => {
@@ -24,24 +26,6 @@ const TicketList = () => {
 
     const [one, two] = segments
 
-    const departureTimeFromOrigin = format(new Date(one.date), 'kk:mm')
-    const departureTimeFromDestination = format(new Date(two.date), 'kk:mm')
-
-    const travelTimeFromOrigin = format(addMinutes(new Date(one.date), one.duration), 'kk:mm')
-    const travelTimeFromDestination = format(addMinutes(new Date(two.date), two.duration), 'kk:mm')
-
-    const hoursInTransitFromOrigin = Math.floor(one.duration / 60)
-    const minutesInTransitFromOrigin = one.duration % 60
-
-    const hoursInTransitFromDestination = Math.floor(two.duration / 60)
-    const minutesInTransitFromDestination = two.duration % 60
-
-    const stopsFromFirstDeparture = one.stops.map(item => <p key={nanoid()}>{item}</p>)
-    const numberOfStopsFromFirstDeparture = stopsFromFirstDeparture.length
-
-    const stopsFromSecondDeparture = two.stops.map(item => <p key={nanoid()}>{item}</p>)
-    const numberOfStopsFromSecondDeparture = stopsFromSecondDeparture.length
-
     return (
       <div className="ticketItem" key={nanoid()}>
         <div className="price__logo">
@@ -49,48 +33,9 @@ const TicketList = () => {
           <img src="" alt="" />
         </div>
         <div className="infoTicket">
-          <div className="departure__arrival">
-            <div className="departure">
-              <p>
-                {one.origin} - {one.destination}
-              </p>
-              <p>
-                {departureTimeFromOrigin} - {travelTimeFromOrigin}
-              </p>
-            </div>
-            <div className="arrival">
-              <p>
-                {two.origin} - {two.destination}
-              </p>
-              <p>
-                {departureTimeFromDestination} - {travelTimeFromDestination}
-              </p>
-            </div>
-          </div>
-          <div className="from__to">
-            <div className="onTheWayFrom">
-              <p>в пути</p>
-              <p>
-                {hoursInTransitFromOrigin}ч {minutesInTransitFromOrigin}м
-              </p>
-            </div>
-            <div className="onTheWayTo">
-              <p>в пути</p>
-              <p>
-                {hoursInTransitFromDestination}ч {minutesInTransitFromDestination}м
-              </p>
-            </div>
-          </div>
-          <div className="transferFrom__transferTo">
-            <div className="transferFrom">
-              <p className="counterTransfer">{numberOfStopsFromFirstDeparture} пересадок</p>
-              <div className="transfer">{stopsFromFirstDeparture}</div>
-            </div>
-            <div className="transferTo">
-              <p className="counterTransfer">{numberOfStopsFromSecondDeparture} пересадок</p>
-              <div className="transfer">{stopsFromSecondDeparture}</div>
-            </div>
-          </div>
+          <DepartureArrival segments={[one, two]} />
+          <FromTo segments={[one, two]} />
+          <TransferFromTransferTo segments={[one, two]} />
         </div>
       </div>
     )
