@@ -1,16 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
-import { dataTicket, saveDataTicket } from '../components/actions/actions'
+import { dataTicket, saveDataTicket } from '../actions/actions'
 
 const useFetchDataTicket = () => {
   const dispatch = useDispatch()
   const useSearchId = useSelector(state => state.ticket.searchId)
   const stopFetching = useSelector(state => state.ticket.stop)
+  const url = 'https://aviasales-test-api.kata.academy'
 
   const fetchSearchId = async () => {
     try {
-      const response = await fetch('https://aviasales-test-api.kata.academy/search')
+      const response = await fetch(`${url}/search`)
 
       if (!response.ok) {
         throw new Error('Failed to fetch data')
@@ -25,9 +26,12 @@ const useFetchDataTicket = () => {
 
   const fetchTicketData = async searchId => {
     try {
-      const response = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`)
+      const response = await fetch(`${url}/tickets?searchId=${searchId}`)
 
       if (!response.ok) {
+        if (response.status === 500) {
+          return null
+        }
         throw new Error('Failed to fetch data')
       }
 
@@ -35,7 +39,7 @@ const useFetchDataTicket = () => {
 
       return data
     } catch (error) {
-      throw new Error('Error')
+      throw new Error(error.message)
     }
   }
 

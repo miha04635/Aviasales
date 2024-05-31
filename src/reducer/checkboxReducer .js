@@ -7,11 +7,11 @@ import {
 } from '../actions/actions'
 
 const initialState = {
-  allTransfer: false,
-  noTransfer: false,
-  oneTransfer: false,
-  twoTransfer: false,
-  threeTransfer: false,
+  allTransfer: true,
+  noTransfer: true,
+  oneTransfer: true,
+  twoTransfer: true,
+  threeTransfer: true,
   filterTicket: [],
 }
 

@@ -7,7 +7,7 @@ import {
   TOGGLE_ONE_CHECKBOX,
   TOGGLE_TWO_CHECKBOX,
   TOGGLE_THREE_CHECKBOX,
-} from '../actions/actions'
+} from '../../actions/actions'
 
 import styles from './transferCount.module.scss'
 

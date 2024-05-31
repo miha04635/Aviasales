@@ -6,7 +6,7 @@ import TicketList from '../ticketList/ticketList'
 import TicketFilter from '../ticketFilter/ticketFilter'
 import TransferCount from '../transferCount/transferCount'
 import useFetchDataTicket from '../../services/servicesTicket'
-import svg from '../icons/plane.svg'
+import svg from '../../assets/icons/plane.svg'
 
 import styles from './app.module.scss'
 

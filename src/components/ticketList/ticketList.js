@@ -1,13 +1,18 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { nanoid } from 'nanoid'
 
 import DepartureArrival from '../departureArrival/departureArrival'
 import FromTo from '../fromTo/fromTo'
 import TransferFromTransferTo from '../transferFromTransferTo/transferFromTransferTo'
-import './ticketList.scss'
+
+import styles from './ticketList.module.scss'
 
 const TicketList = () => {
+  let maxId = 100
+
+  const generateIncrementalId = () => {
+    return ++maxId
+  }
   const ticket = useSelector(state => state.checkbox.filterTicket)
   const [visibleCount, setVisibleCount] = useState(5)
 
@@ -27,12 +32,12 @@ const TicketList = () => {
     const [one, two] = segments
 
     return (
-      <div className="ticketItem" key={nanoid()}>
-        <div className="price__logo">
-          <p className="price">{price} р</p>
+      <div className={styles.ticketItem} key={generateIncrementalId()}>
+        <div className={styles.price__logo}>
+          <p className={styles.price}>{price} р</p>
           <img src="" alt="" />
         </div>
-        <div className="infoTicket">
+        <div className={styles.infoTicket}>
           <DepartureArrival segments={[one, two]} />
           <FromTo segments={[one, two]} />
           <TransferFromTransferTo segments={[one, two]} />
@@ -46,7 +51,7 @@ const TicketList = () => {
       <div>
         {ticketArray.slice(0, visibleCount).map(renderTicket)}
         {visibleCount < ticketArray.length && (
-          <button className="showMoreTicket" onClick={showMore}>
+          <button className={styles.showMoreTicket} onClick={showMore}>
             показать ещё 5 билетов!
           </button>
         )}

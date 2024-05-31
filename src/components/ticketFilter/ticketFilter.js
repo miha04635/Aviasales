@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { ticketSortPrice, ticketSortDuration, ticketSortOptimal } from '../actions/actions'
+import { ticketSortPrice, ticketSortDuration, ticketSortOptimal } from '../../actions/actions'
 
 import styles from './ticketFilter.module.scss'
 
