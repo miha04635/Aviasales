@@ -22,6 +22,16 @@
 
   "plugins": ["react", "prettier", "import"],
   "rules": {
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": [
+          "state" // for Redux toolkit state management
+        ]
+      }
+    ],
+
     "class-methods-use-this": "off",
     "consistent-return": "off",
     "no-plusplus": 0,

@@ -13,8 +13,10 @@ import styles from './transferCount.module.scss'
 
 const TransferCount = () => {
   const dispatch = useDispatch()
-  const isChecked = useSelector(state => state.checkbox)
-  const ticket = useSelector(state => state.ticket.ticket)
+  const {
+    filters: isChecked,
+    tickets: { ticket },
+  } = useSelector(state => state)
 
   const checkboxes = [
     { id: 'allTransfer', label: 'Все', action: TOGGLE_ALL_CHECKBOX },
@@ -23,24 +25,23 @@ const TransferCount = () => {
     { id: 'twoTransfer', label: '2 пересадки', action: TOGGLE_TWO_CHECKBOX },
     { id: 'threeTransfer', label: '3 пересадки', action: TOGGLE_THREE_CHECKBOX },
   ]
+
   const handleCheckboxChange = action => event => {
     dispatch({ type: action, payload: event.target.checked, ticket })
   }
 
   const element = checkboxes.map(({ id, label, action }) => (
     <label key={id} className={styles[id]}>
-      <input type="checkbox" id={id} onChange={event => handleCheckboxChange(action)(event)} checked={isChecked[id]} />
+      <input type="checkbox" id={id} onChange={handleCheckboxChange(action)} checked={isChecked[id]} />
       {label}
     </label>
   ))
 
   return (
-    <>
-      <div className={styles.container}>
-        <p className={styles.countTransfer}>количество пересадок</p>
-        <div className={styles.filter}>{element}</div>
-      </div>
-    </>
+    <div className={styles.container}>
+      <p className={styles.countTransfer}>количество пересадок</p>
+      <div className={styles.filter}>{element}</div>
+    </div>
   )
 }
 

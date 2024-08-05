@@ -1,14 +1,16 @@
-import { combineReducers } from 'redux'
+// import { combineReducers } from 'redux'
 
-import filterReducer from './filterReducer'
-import checkboxReducer from './checkboxReducer '
-import ticketReducer from './ticketReducer'
-import ticketSortReducer from './ticketSortReducer'
+// import filterReducer from './filterReducer'
+// import checkboxReducer from './checkboxReducer '
+// import ticketReducer from './ticketReducer'
+// import ticketSortReducer from './ticketSortReducer'
+// import errorReducer from './errorReducer'
 
-const rootReducer = combineReducers({
-  filter: filterReducer,
-  checkbox: checkboxReducer,
-  ticket: ticketReducer,
-  ticketSort: ticketSortReducer,
-})
-export default rootReducer
+// const rootReducer = combineReducers({
+//   filter: filterReducer,
+//   checkbox: checkboxReducer,
+//   ticket: ticketReducer,
+//   ticketSort: ticketSortReducer,
+//   error: errorReducer,
+// })
+// export default rootReducer
