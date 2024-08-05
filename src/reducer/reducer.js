@@ -38,12 +38,10 @@ const initialState = {
 }
 
 const calculateFilters = filters => {
-  const { all, ...others } = filters
+  const { allTransfer, ...others } = filters
   const values = Object.values(others)
-  const filtered = values.filter(value => value)
-  const newAll = values.length === filtered.length
-  const result = { all: newAll, ...others }
-  return result
+  const allTrue = values.every(value => value)
+  return { allTransfer: allTrue, ...others }
 }
 
 const calculateSorted = (priority, tickets) => {
@@ -108,8 +106,9 @@ const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case TOGGLE_ALL_CHECKBOX: {
       let newFilters = { ...state.filters }
+      const newAllTransferValue = !state.filters.allTransfer
       Object.keys(newFilters).forEach(key => {
-        newFilters[key] = !state.filters.allTransfer
+        newFilters[key] = newAllTransferValue
       })
       newFilters = calculateFilters(newFilters)
 
