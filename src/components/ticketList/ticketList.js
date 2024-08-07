@@ -22,14 +22,15 @@ const TicketList = () => {
   }
 
   const renderTicket = (ticket, index) => {
-    const { price, segments } = ticket
+    const { price, segments, carrier } = ticket
     const [one, two] = segments
+    const logoUrl = `//pics.avs.io/99/36/${carrier}.png`
 
     return (
       <div className={styles.ticketItem} key={index}>
         <div className={styles.price__logo}>
           <p className={styles.price}>{price} р</p>
-          <img src="" alt="" />
+          <img className={styles.logo} src={logoUrl} alt={carrier} />
         </div>
         <div className={styles.infoTicket}>
           <DepartureArrival segments={[one, two]} />
