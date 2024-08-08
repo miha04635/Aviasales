@@ -23,7 +23,9 @@
   "plugins": ["react", "prettier", "import"],
   "rules": {
     "class-methods-use-this": "off",
+    "consistent-return": "off",
     "no-plusplus": 0,
+    "no-unused-vars": "off",
     "indent": ["error"],
     "prettier/prettier": "error",
     "linebreak-style": [0, "unix"],
