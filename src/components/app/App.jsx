@@ -19,7 +19,7 @@ function App() {
     <>
       <div className={styles.containerElement}>
         <ErrorMessage />
-        <img alt="" className={styles.iconPlane} src={svg} />
+        <img alt="logo" className={styles.iconPlane} src={svg} />
         <div className={styles.container}>
           <TransferCount />
           <div className={styles.containerTicket}>

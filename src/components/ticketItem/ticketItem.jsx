@@ -9,7 +9,6 @@ const TicketItem = () => {
       <div className={styles.ticketItem}>
         <div className={styles.price__logo}>
           <p className={styles.price}>13 400 р</p>
-          <img src="" alt="" />
         </div>
         <div className={styles.infoTicket}>
           <div className={styles.departure__arrival}>

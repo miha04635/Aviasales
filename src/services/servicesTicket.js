@@ -5,14 +5,14 @@ import { dataTicket, saveDataTicket, setError } from '../actions/actions'
 
 const useFetchDataTicket = () => {
   const dispatch = useDispatch()
-  const currentSearchId = useSelector(state => state.tickets.searchId)
-  const stopFetching = useSelector(state => state.tickets.stop)
+  const searchId = useSelector(state => state.tickets.searchId)
+  const isFetchingStopped = useSelector(state => state.tickets.stop)
 
-  const url = 'https://aviasales-test-api.kata.academy'
+  const apiUrl = 'https://aviasales-test-api.kata.academy'
 
-  const fetchSearchId = async () => {
+  const getSearchId = async () => {
     try {
-      const response = await fetch(`${url}/search`)
+      const response = await fetch(`${apiUrl}/search`)
       if (!response.ok) {
         throw new Error('Failed to fetch searchId')
       }
@@ -23,9 +23,9 @@ const useFetchDataTicket = () => {
     }
   }
 
-  const fetchTicketData = async searchId => {
+  const getTickets = async Id => {
     try {
-      const response = await fetch(`${url}/tickets?searchId=${searchId}`)
+      const response = await fetch(`${apiUrl}/tickets?searchId=${searchId}`)
       if (!response.ok) {
         if (response.status === 500) {
           return null
@@ -40,110 +40,34 @@ const useFetchDataTicket = () => {
   }
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (!currentSearchId) {
-        const searchData = await fetchSearchId()
+    const initializeSearchId = async () => {
+      if (!searchId) {
+        const searchData = await getSearchId()
 
         if (searchData) {
           dispatch(dataTicket(searchData.searchId))
         }
       }
     }
-    fetchData()
-  }, [dispatch, currentSearchId])
+    initializeSearchId()
+  }, [dispatch, searchId])
 
   useEffect(() => {
-    const fetchTickets = async () => {
-      if (currentSearchId && !stopFetching) {
-        const ticketData = await fetchTicketData(currentSearchId)
+    const handleTicketsFetch = async () => {
+      if (searchId && !isFetchingStopped) {
+        const ticketData = await getTickets(searchId)
         if (ticketData) {
           dispatch(saveDataTicket(ticketData.tickets, ticketData.stop))
           if (!ticketData.stop) {
-            fetchTickets()
+            handleTicketsFetch()
           }
         } else {
-          fetchTickets()
+          handleTicketsFetch()
         }
       }
     }
-    fetchTickets()
-  }, [dispatch, currentSearchId, stopFetching])
-
-  return null
+    handleTicketsFetch()
+  }, [dispatch, searchId, isFetchingStopped])
 }
 
 export default useFetchDataTicket
-
-// import { useDispatch, useSelector } from 'react-redux'
-// import { useEffect } from 'react'
-
-// import { dataTicket, saveDataTicket } from '../actions/actions'
-
-// const useFetchDataTicket = () => {
-//   const dispatch = useDispatch()
-//   const useSearchId = useSelector(state => state.ticket.searchId)
-//   const stopFetching = useSelector(state => state.ticket.stop)
-//   const url = 'https://aviasales-test-api.kata.academy'
-
-//   const fetchSearchId = async () => {
-//     try {
-//       const response = await fetch(`${url}/search`)
-
-//       if (!response.ok) {
-//         throw new Error('Failed to fetch data')
-//       }
-//       const data = await response.json()
-
-//       return data
-//     } catch (error) {
-//       throw new Error('Error', error)
-//     }
-//   }
-
-//   const fetchTicketData = async searchId => {
-//     try {
-//       const response = await fetch(`${url}/tickets?searchId=${searchId}`)
-
-//       if (!response.ok) {
-//         if (response.status === 500) {
-//           return null
-//         }
-//         throw new Error('Failed to fetch data')
-//       }
-
-//       const data = await response.json()
-
-//       return data
-//     } catch (error) {
-//       throw new Error(error.message)
-//     }
-//   }
-
-//   useEffect(() => {
-//     if (!useSearchId) {
-//       fetchSearchId().then(res => {
-//         if (res) {
-//           dispatch(dataTicket(res.searchId))
-//         }
-//       })
-//     }
-//   }, [dispatch, useSearchId])
-
-//   useEffect(() => {
-//     const intervalId = setInterval(() => {
-//       if (useSearchId && !stopFetching) {
-//         fetchTicketData(useSearchId).then(ticketData => {
-//           if (ticketData) {
-//             dispatch(saveDataTicket(ticketData.tickets, ticketData.stop))
-//           }
-//         })
-//       }
-//     }, 100)
-
-//     return () => clearInterval(intervalId)
-//   }, [dispatch, useSearchId, stopFetching])
-
-//   return null
-// }
-
-// export default useFetchDataTicket
