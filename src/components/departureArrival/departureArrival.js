@@ -1,30 +1,27 @@
 import React from 'react'
-import { addMinutes, format } from 'date-fns'
+
+import { formatDate, formatDateMinutes } from '../../services/serviceDate/date'
+import styles from '../ticketList/ticketList.module.scss'
 
 const DepartureArrival = ({ segments }) => {
   const [one, two] = segments
 
-  const departureTimeFromOrigin = format(new Date(one.date), 'kk:mm')
-  const departureTimeFromDestination = format(new Date(two.date), 'kk:mm')
-
-  const travelTimeFromOrigin = format(addMinutes(new Date(one.date), one.duration), 'kk:mm')
-  const travelTimeFromDestination = format(addMinutes(new Date(two.date), two.duration), 'kk:mm')
   return (
-    <div className="departure__arrival">
-      <div className="departure">
+    <div className={styles.departure__arrival}>
+      <div className={styles.departure}>
         <p>
           {one.origin} - {one.destination}
         </p>
         <p>
-          {departureTimeFromOrigin} - {travelTimeFromOrigin}
+          {formatDate(one)} - {formatDateMinutes(one)}
         </p>
       </div>
-      <div className="arrival">
+      <div className={styles.arrival}>
         <p>
           {two.origin} - {two.destination}
         </p>
         <p>
-          {departureTimeFromDestination} - {travelTimeFromDestination}
+          {formatDate(two)} - {formatDateMinutes(two)}
         </p>
       </div>
     </div>

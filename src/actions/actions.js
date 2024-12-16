@@ -10,6 +10,14 @@ export const optimalBtn = 'OPTIMAL_BTN'
 
 export const DATA_TICKET = 'DATA_TICKET'
 
+export const SHOW_MORE_TICKETS = 'SHOW_MORE_TICKETS'
+
+export const showMoreTickets = () => ({
+  type: SHOW_MORE_TICKETS,
+})
+
+export const onError = message => ({ type: 'ERROR', payload: message })
+
 export const dataTicket = searchId => ({
   type: DATA_TICKET,
   payload: searchId,
@@ -30,15 +38,25 @@ export const ticketSortPrice = ticket => ({
 })
 
 export const TICKET_SORT_DURATION = 'TICKET_SORT_DURATION'
-
 export const ticketSortDuration = ticket => ({
   type: TICKET_SORT_DURATION,
   payload: ticket,
 })
 
 export const TICKET_SORT_OPTIMAL = 'TICKET_SORT_OPTIMAL'
-
 export const ticketSortOptimal = ticket => ({
   type: TICKET_SORT_OPTIMAL,
   payload: ticket,
+})
+
+export const SET_ERROR = 'SET_ERROR'
+export const CLEAR_ERROR = 'CLEAR_ERROR'
+
+export const setError = error => ({
+  type: SET_ERROR,
+  payload: error,
+})
+
+export const clearError = () => ({
+  type: CLEAR_ERROR,
 })

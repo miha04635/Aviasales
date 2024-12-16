@@ -1,38 +1,38 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { nanoid } from 'nanoid'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import DepartureArrival from '../departureArrival/departureArrival'
 import FromTo from '../fromTo/fromTo'
 import TransferFromTransferTo from '../transferFromTransferTo/transferFromTransferTo'
-import './ticketList.scss'
+import { showMoreTickets } from '../../actions/actions'
+
+import styles from './ticketList.module.scss'
 
 const TicketList = () => {
-  const ticket = useSelector(state => state.checkbox.filterTicket)
-  const [visibleCount, setVisibleCount] = useState(5)
+  const tickets = useSelector(state => state.tickets.visibleTickets)
+  const dispatch = useDispatch()
+  const numberOfVisible = useSelector(state => state.numberOfVisible)
 
-  const showMore = () => {
-    setVisibleCount(prevCount => prevCount + 5)
+  if (!tickets || tickets.length === 0) {
+    return <p className={styles.notTicket}>Нет билетов соответствующих вашим фильтрам</p>
   }
 
-  if (!ticket) {
-    return null
+  const handleShowMore = () => {
+    dispatch(showMoreTickets())
   }
 
-  const ticketArray = ticket
-
-  const renderTicket = el => {
-    const { price, segments } = el
-
+  const renderTicket = (ticket, index) => {
+    const { price, segments, carrier } = ticket
     const [one, two] = segments
+    const logoUrl = `//pics.avs.io/99/36/${carrier}.png`
 
     return (
-      <div className="ticketItem" key={nanoid()}>
-        <div className="price__logo">
-          <p className="price">{price} р</p>
-          <img src="" alt="" />
+      <div className={styles.ticketItem} key={index}>
+        <div className={styles.price__logo}>
+          <p className={styles.price}>{price} р</p>
+          <img className={styles.logo} src={logoUrl} alt={carrier} />
         </div>
-        <div className="infoTicket">
+        <div className={styles.infoTicket}>
           <DepartureArrival segments={[one, two]} />
           <FromTo segments={[one, two]} />
           <TransferFromTransferTo segments={[one, two]} />
@@ -42,16 +42,12 @@ const TicketList = () => {
   }
 
   return (
-    <>
-      <div>
-        {ticketArray.slice(0, visibleCount).map(renderTicket)}
-        {visibleCount < ticketArray.length && (
-          <button className="showMoreTicket" onClick={showMore}>
-            показать ещё 5 билетов!
-          </button>
-        )}
-      </div>
-    </>
+    <div>
+      {tickets.slice(0, numberOfVisible).map(renderTicket)}
+      <button className={styles.showMoreTicket} onClick={handleShowMore}>
+        показать ещё 5 билетов!
+      </button>
+    </div>
   )
 }
 

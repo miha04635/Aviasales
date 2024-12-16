@@ -1,6 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 p {
   margin: 0;
   padding: 0;
+}
+
+.notTicket {
+  font-family: Open Sans;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .ticketItem {
@@ -23,38 +35,48 @@ p {
   text-align: left;
   margin-left: 16px;
   margin-bottom: 16px;
+}
 
-  .price {
-    color: rgba(33, 150, 243, 1);
-    font-size: 24px;
-  }
-  .departure__arrival,
-  .from__to,
-  .transferFrom__transferTo {
-    div:first-child {
-      margin-bottom: 10px;
-    }
-  }
+.price__logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .departure,
-  .arrival,
-  .onTheWayFrom,
-  .onTheWayTo {
-    p:first-of-type {
-      color: rgba(160, 176, 185, 1);
-    }
-    p:last-of-type {
-      color: rgba(74, 74, 74, 1);
-    }
+.price {
+  color: rgba(33, 150, 243, 1);
+  font-size: 24px;
+}
+
+.departure__arrival,
+.from__to,
+.transferFrom__transferTo {
+  div:first-child {
+    margin-bottom: 10px;
   }
 }
+
+.departure,
+.arrival,
+.onTheWayFrom,
+.onTheWayTo {
+  p:first-of-type {
+    color: rgba(160, 176, 185, 1);
+  }
+  p:last-of-type {
+    color: rgba(74, 74, 74, 1);
+  }
+}
+
 .transfer {
   display: flex;
   gap: 5px;
 }
+
 .counterTransfer {
   color: rgba(160, 176, 185, 1);
 }
+
 .infoTicket {
   display: flex;
   justify-content: space-between;
